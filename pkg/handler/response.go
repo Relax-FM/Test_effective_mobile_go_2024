@@ -6,7 +6,7 @@ import (
 )
 
 type errorResponse struct {
-	Message string `json:"message"`
+	Message string `json:"message" default:"NOT OK!"`
 }
 
 func newErrorResponse(c *gin.Context, statusCode int, message string) {
@@ -15,5 +15,5 @@ func newErrorResponse(c *gin.Context, statusCode int, message string) {
 }
 
 type statusResponse struct {
-	Status string `json:"status"`
+	Status string `json:"status" default:"OK!"`
 }

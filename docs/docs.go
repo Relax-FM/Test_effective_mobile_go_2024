@@ -329,7 +329,8 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "NOT OK!"
                 }
             }
         },
@@ -359,7 +360,8 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "status": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "OK!"
                 }
             }
         },
@@ -367,7 +369,8 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "couplet": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Выйду ночью в поле с конем"
                 }
             }
         },
@@ -396,22 +399,28 @@ const docTemplate = `{
             ],
             "properties": {
                 "group": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Любэ"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "default": 1
                 },
                 "link": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "https://www.youtube.com/watch?v=m8ZFZsz8mFE"
                 },
                 "releaseDate": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "1994-06-21"
                 },
                 "song": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Конь"
                 },
                 "text": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Выйду ночью в поле с конем"
                 }
             }
         },
@@ -434,18 +443,20 @@ const docTemplate = `{
                     "default": "Любэ"
                 },
                 "link": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "https://www.youtube.com/watch?v=m8ZFZsz8mFE"
                 },
                 "releaseDate": {
                     "type": "string",
-                    "default": "2023.12.31"
+                    "default": "1994-06-21"
                 },
                 "song": {
                     "type": "string",
                     "default": "Конь"
                 },
                 "text": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Выйду ночью в поле с конем"
                 }
             }
         }

@@ -3,6 +3,7 @@ definitions:
   handler.errorResponse:
     properties:
       message:
+        default: NOT OK!
         type: string
     type: object
   handler.getAllPagesMusicItemsResponse:
@@ -22,11 +23,13 @@ definitions:
   handler.statusResponse:
     properties:
       status:
+        default: OK!
         type: string
     type: object
   tem2024.CoupletMusicText:
     properties:
       couplet:
+        default: Выйду ночью в поле с конем
         type: string
     type: object
   tem2024.CreateMusicInput:
@@ -44,16 +47,22 @@ definitions:
   tem2024.MusicItem:
     properties:
       group:
+        default: Любэ
         type: string
       id:
+        default: 1
         type: integer
       link:
+        default: https://www.youtube.com/watch?v=m8ZFZsz8mFE
         type: string
       releaseDate:
+        default: "1994-06-21"
         type: string
       song:
+        default: Конь
         type: string
       text:
+        default: Выйду ночью в поле с конем
         type: string
     required:
     - group
@@ -72,14 +81,16 @@ definitions:
         default: Любэ
         type: string
       link:
+        default: https://www.youtube.com/watch?v=m8ZFZsz8mFE
         type: string
       releaseDate:
-        default: 2023.12.31
+        default: "1994-06-21"
         type: string
       song:
         default: Конь
         type: string
       text:
+        default: Выйду ночью в поле с конем
         type: string
     type: object
 host: localhost:8800
