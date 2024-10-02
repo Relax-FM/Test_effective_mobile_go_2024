@@ -28,12 +28,18 @@ import (
 //	@host				localhost:8800
 //	@BasePath			/
 
-func main() {
+func main() {	
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 
 	if err := godotenv.Load(); err != nil {
 		logrus.Fatalf("Error loading env variables: %s", err.Error())
 	}
+
+	ll, err := logrus.ParseLevel(os.Getenv("LOG_LEVEL"))
+    if err != nil {
+        ll = logrus.DebugLevel
+    }
+    logrus.SetLevel(ll)
 
 	db, err := repository.NewPostgresDB(repository.Config{
 		Password: 	os.Getenv("DB_PASSWORD"),

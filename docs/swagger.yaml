@@ -9,7 +9,7 @@ definitions:
     properties:
       data:
         items:
-          $ref: '#/definitions/tem2024.GetPageMusicItemsResponse'
+          $ref: '#/definitions/tem2024.PageMusicItemsResponse'
         type: array
     type: object
   handler.getMusicTextResponse:
@@ -41,13 +41,6 @@ definitions:
     - group
     - song
     type: object
-  tem2024.GetPageMusicItemsResponse:
-    properties:
-      page:
-        items:
-          $ref: '#/definitions/tem2024.MusicItem'
-        type: array
-    type: object
   tem2024.MusicItem:
     properties:
       group:
@@ -65,6 +58,13 @@ definitions:
     required:
     - group
     - song
+    type: object
+  tem2024.PageMusicItemsResponse:
+    properties:
+      page:
+        items:
+          $ref: '#/definitions/tem2024.MusicItem'
+        type: array
     type: object
   tem2024.UpdateMusicInput:
     properties:

@@ -26,11 +26,11 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		music := api.Group("/music")
 		{
-			music.GET("/", h.getAllMusic) // 
-			music.GET("/:id", h.getMusicText) // 
-			music.DELETE("/:id", h.deleteMusicItem) // Готово
-			music.PUT("/:id", h.updateMusicItem) // Готово
-			music.POST("/", h.addMusicItem) // Готово
+			music.GET("/", h.getAllMusic)
+			music.GET("/:id", h.getMusicText)
+			music.DELETE("/:id", h.deleteMusicItem)
+			music.PUT("/:id", h.updateMusicItem)
+			music.POST("/", h.addMusicItem)
 		}
 	}
 

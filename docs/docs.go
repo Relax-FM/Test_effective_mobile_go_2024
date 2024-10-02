@@ -339,7 +339,7 @@ const docTemplate = `{
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/tem2024.GetPageMusicItemsResponse"
+                        "$ref": "#/definitions/tem2024.PageMusicItemsResponse"
                     }
                 }
             }
@@ -388,17 +388,6 @@ const docTemplate = `{
                 }
             }
         },
-        "tem2024.GetPageMusicItemsResponse": {
-            "type": "object",
-            "properties": {
-                "page": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/tem2024.MusicItem"
-                    }
-                }
-            }
-        },
         "tem2024.MusicItem": {
             "type": "object",
             "required": [
@@ -423,6 +412,17 @@ const docTemplate = `{
                 },
                 "text": {
                     "type": "string"
+                }
+            }
+        },
+        "tem2024.PageMusicItemsResponse": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/tem2024.MusicItem"
+                    }
                 }
             }
         },

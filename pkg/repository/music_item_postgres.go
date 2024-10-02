@@ -21,18 +21,96 @@ func (r *MusicItemPostgres) Create(item tem2024.CreateMusicInput) (int, error) {
 
 	var id int
 	query := fmt.Sprintf("INSERT INTO %s (song_name, group_name) VALUES ($1, $2) RETURNING id", mainTable)
-	logrus.Print(query)
+	logrus.Debug(query)
 	err := r.db.Get(&id, query, item.SongName, item.GroupName)
 
 	return id, err
 }
 
-func (r *MusicItemPostgres) GetAllMusic(listId tem2024.QueryParams) ([]tem2024.GetPageMusicItemsResponse, error) {
-	return nil, nil
+
+func (r *MusicItemPostgres) GetAllMusic(input tem2024.QueryParams) ([]tem2024.PageMusicItemsResponse, error) {
+
+	validOrderParams := map[string]struct{}{
+		"id":           {},
+		"song_name":    {},
+		"group_name":   {},
+		"release_date": {},
+		"song_text":    {},
+	}
+
+	var allMusicElements []tem2024.MusicItemSql
+
+	_, exists := validOrderParams[input.SortBy]
+	if !exists {
+		input.SortBy = "id"
+	}
+
+	var descAsc string
+	if input.Desc{
+		descAsc = "DESC"
+	} else {
+		descAsc = "ASC"
+	}
+
+	query := fmt.Sprintf("SELECT * FROM %s ORDER BY %s %s", mainTable, input.SortBy, descAsc)
+	err := r.db.Select(&allMusicElements, query)
+
+	logrus.Debug(allMusicElements)
+
+	var pages []tem2024.PageMusicItemsResponse
+	page := tem2024.PageMusicItemsResponse{
+		Page: []tem2024.MusicItem{},
+	}
+	count := 0
+
+	for _, element := range allMusicElements {
+		if count == input.Limit {
+			logrus.Debug(page)
+			pages = append(pages, page)
+			page.Page = []tem2024.MusicItem{}
+			count = 0
+		}
+		page.Page = append(page.Page, tem2024.MusicItem{
+			Id          : element.Id,
+			SongName    : element.SongName,
+			GroupName   : element.GroupName,
+			ReleaseDate : element.ReleaseDate.String,
+			SongText 	: element.SongText.String,
+			LinkUrl 	: element.LinkUrl.String,
+		})
+		count++
+	}
+	pages = append(pages, page)
+	page.Page = []tem2024.MusicItem{}
+	count = 0
+
+	return pages, err
 }
 
 func (r *MusicItemPostgres) GetById(itemId int) ([]tem2024.CoupletMusicText, error) {
-	return nil, nil
+	var fullText tem2024.FullMusicText
+
+	logrus.Debug(itemId)
+
+	query := fmt.Sprintf("SELECT song_text FROM %s WHERE id=$1", mainTable)
+	err := r.db.Get(&fullText, query, itemId)
+
+	logrus.Debug(fullText)
+
+	// Пагинация по куплетам (\n\n)
+	var list []tem2024.CoupletMusicText
+
+	splitedTexts := strings.Split(fullText.MusicText, "\n\n")
+
+	for _, splitedText := range splitedTexts{
+		list = append(list, tem2024.CoupletMusicText{
+			Couplet: splitedText,
+		})
+	}
+
+	logrus.Debug(list)
+
+	return list, err
 }
 
 func (r *MusicItemPostgres) Delete(itemId int) error {
@@ -62,7 +140,7 @@ func (r *MusicItemPostgres) Update(itemId int, input tem2024.UpdateMusicInput) e
 	if input.ReleaseDate != nil {
 		setValues = append(setValues, fmt.Sprintf("release_date=$%d", argId))
 		onlyDate := *input.ReleaseDate
-		logrus.Print(onlyDate)
+		logrus.Debug(onlyDate)
 		args = append(args, onlyDate)
 		argId++
 	}

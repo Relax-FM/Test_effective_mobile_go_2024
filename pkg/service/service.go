@@ -7,7 +7,7 @@ import (
 
 type MusicItem interface {
 	Create(item tem2024.CreateMusicInput) (int, error)
-	GetAllMusic(listId tem2024.QueryParams) ([]tem2024.GetPageMusicItemsResponse, error)
+	GetAllMusic(input tem2024.QueryParams) ([]tem2024.PageMusicItemsResponse, error)
 	GetById(itemId int) ([]tem2024.CoupletMusicText, error)
 	Delete(itemId int) error
 	Update(itemId int, input tem2024.UpdateMusicInput) error

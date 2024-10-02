@@ -10,7 +10,7 @@ import (
 )
 
 type getAllPagesMusicItemsResponse struct {
-	Data []tem2024.GetPageMusicItemsResponse `json:"data"`
+	Data []tem2024.PageMusicItemsResponse `json:"data"`
 }
 
 // @Summary 			Get all music
