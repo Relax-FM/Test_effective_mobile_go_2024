@@ -1,4 +1,4 @@
-package testeffectivemobilego2024
+package tem2024
 
 import (
 	"context"
