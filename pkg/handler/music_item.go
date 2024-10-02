@@ -13,20 +13,20 @@ type getAllPagesMusicItemsResponse struct {
 	Data []tem2024.GetPageMusicItemsResponse `json:"data"`
 }
 
-// @Summary Get all music
-// @Tags music
-// @Description Get all music in our library
-// @ID get-all-music
-// @Accept json
-// @Produce json
+// @Summary 			Get all music
+// @Tags 				music
+// @Description 		Get all music in our library
+// @ID 					get-all-music
+// @Accept 				json
+// @Produce 			json
 // @Param 	sort_by 	query 	string 		false "Sorted by"				default(id)
 // @Param 	desc 		query 	boolean 	false "Desc/asc"				default(true)
 // @Param 	limit 		query 	int 		false "limit for pagination"	default(50)
-// @Success 200 {object} getAllPagesMusicItemsResponse
-// @Failure 400,404 {object} errorResponse
-// @Failure 500 {object} errorResponse
-// @Failure default {object} errorResponse
-// @Router /api/music [get]
+// @Success 200 		{object} 			getAllPagesMusicItemsResponse
+// @Failure 400,404 	{object} 			errorResponse
+// @Failure 500 		{object} 			errorResponse
+// @Failure default 	{object} 			errorResponse
+// @Router 	/api/music 	[get]
 func (h *Handler) getAllMusic(c *gin.Context) {
 	var inputParams tem2024.QueryParams
 	if err := c.Bind(&inputParams); err != nil {
@@ -49,18 +49,18 @@ type getMusicTextResponse struct {
 	Text []tem2024.CoupletMusicText `json:"text"`
 }
 
-// @Summary Get music text
-// @Tags music
-// @Description REturn music text with pagination
-// @ID get-music-text
-// @Accept json
-// @Produce json
-// @Param id path int true "Music ID"
-// @Success 200 {object} getMusicTextResponse
-// @Failure 400,404 {object} errorResponse
-// @Failure 500 {object} errorResponse
-// @Failure default {object} errorResponse
-// @Router /api/music/{id} [get]
+// @Summary 			Get music text
+// @Tags 				music
+// @Description 		Return music text with pagination
+// @ID 					get-music-text
+// @Accept 				json
+// @Produce 			json
+// @Param 	id 			path 		int 	true 	"Music ID"
+// @Success 200 		{object} 	getMusicTextResponse
+// @Failure 400,404 	{object} 	errorResponse
+// @Failure 500 		{object} 	errorResponse
+// @Failure default 	{object} 	errorResponse
+// @Router 	/api/music/{id} 		[get]
 func (h *Handler) getMusicText(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -79,18 +79,18 @@ func (h *Handler) getMusicText(c *gin.Context) {
 	})
 }
 
-// @Summary Delete music item
-// @Tags music
-// @Description Delete music item by id
-// @ID delete-music-item
-// @Accept json
-// @Produce json
-// @Param id path int true "Music ID"
-// @Success 200 {object} statusResponse
-// @Failure 400,404 {object} errorResponse
-// @Failure 500 {object} errorResponse
-// @Failure default {object} errorResponse
-// @Router /api/music/{id} [delete]
+// @Summary 			Delete music item
+// @Tags 				music
+// @Description 		Delete music item by id
+// @ID 					delete-music-item
+// @Accept 				json
+// @Produce 			json
+// @Param 	id 	path 	int 	true 	"Music ID"
+// @Success 200 		{object} 	statusResponse
+// @Failure 400,404 	{object} 	errorResponse
+// @Failure 500 		{object} 	errorResponse
+// @Failure default 	{object} 	errorResponse
+// @Router 	/api/music/{id} 		[delete]
 func (h *Handler) deleteMusicItem(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -109,19 +109,19 @@ func (h *Handler) deleteMusicItem(c *gin.Context) {
 	})
 }
 
-// @Summary Update music
-// @Tags music
-// @Description Update music info by id
-// @ID update-music
-// @Accept json
-// @Produce json
-// @Param id path int true "Music ID"
-// @Param input body tem2024.UpdateMusicInput true "Update info"
-// @Success 200 {object} statusResponse
-// @Failure 400,404 {object} errorResponse
-// @Failure 500 {object} errorResponse
-// @Failure default {object} errorResponse
-// @Router /api/music/{id} [put]
+// @Summary 			Update music
+// @Tags 				music
+// @Description 		Update music info by id
+// @ID 					update-music
+// @Accept 				json
+// @Produce 			json
+// @Param 	id 		path 	int 						true 	"Music ID"
+// @Param 	input 	body 	tem2024.UpdateMusicInput 	true 	"Update info"
+// @Success 200 	{object} 	statusResponse
+// @Failure 400,404 {object} 	errorResponse
+// @Failure 500 	{object} 	errorResponse
+// @Failure default {object} 	errorResponse
+// @Router 	/api/music/{id} 	[put]
 func (h *Handler) updateMusicItem(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -146,18 +146,18 @@ func (h *Handler) updateMusicItem(c *gin.Context) {
 	})
 }
 
-// @Summary Create music item
-// @Tags music
-// @Description create todo list
-// @ID create-list
-// @Accept json
-// @Produce json
-// @Param input body tem2024.UpdateMusicInput true "updated music info"
-// @Success 200 {object} statusResponse
-// @Failure 400,404 {object} errorResponse
-// @Failure 500 {object} errorResponse
-// @Failure default {object} errorResponse
-// @Router /api/music [post]
+// @Summary 			Create music item
+// @Tags 				music
+// @Description 		create todo list
+// @ID 					create-list
+// @Accept 				json
+// @Produce 			json
+// @Param 	input 	body 		tem2024.UpdateMusicInput 	true 	"updated music info"
+// @Success 200 	{object} 	statusResponse
+// @Failure 400,404 {object} 	errorResponse
+// @Failure 500 	{object} 	errorResponse
+// @Failure default {object} 	errorResponse
+// @Router 		/api/music 		[post]
 func (h *Handler) addMusicItem(c *gin.Context) {
 	var input tem2024.CreateMusicInput
 	if err := c.BindJSON(&input); err != nil {

@@ -60,7 +60,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/tem2024.getAllPagesMusicItemsResponse"
+                            "$ref": "#/definitions/handler.getAllPagesMusicItemsResponse"
                         }
                     },
                     "400": {
@@ -117,7 +117,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "integer"
+                            "$ref": "#/definitions/handler.statusResponse"
                         }
                     },
                     "400": {
@@ -149,7 +149,7 @@ const docTemplate = `{
         },
         "/api/music/{id}": {
             "get": {
-                "description": "REturn music text with pagination",
+                "description": "Return music text with pagination",
                 "consumes": [
                     "application/json"
                 ],
@@ -333,13 +333,24 @@ const docTemplate = `{
                 }
             }
         },
+        "handler.getAllPagesMusicItemsResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/tem2024.GetPageMusicItemsResponse"
+                    }
+                }
+            }
+        },
         "handler.getMusicTextResponse": {
             "type": "object",
             "properties": {
                 "text": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/tem2024.MusicText"
+                        "$ref": "#/definitions/tem2024.CoupletMusicText"
                     }
                 }
             }
@@ -349,6 +360,25 @@ const docTemplate = `{
             "properties": {
                 "status": {
                     "type": "string"
+                }
+            }
+        },
+        "tem2024.CoupletMusicText": {
+            "type": "object",
+            "properties": {
+                "couplet": {
+                    "type": "string"
+                }
+            }
+        },
+        "tem2024.GetPageMusicItemsResponse": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/tem2024.MusicItem"
+                    }
                 }
             }
         },
@@ -379,14 +409,6 @@ const docTemplate = `{
                 }
             }
         },
-        "tem2024.MusicText": {
-            "type": "object",
-            "properties": {
-                "couplet": {
-                    "type": "string"
-                }
-            }
-        },
         "tem2024.UpdateMusicInput": {
             "type": "object",
             "properties": {
@@ -404,28 +426,6 @@ const docTemplate = `{
                 },
                 "text": {
                     "type": "string"
-                }
-            }
-        },
-        "tem2024.getAllPagesMusicItemsResponse": {
-            "type": "object",
-            "properties": {
-                "data": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/tem2024.getPageMusicItemsResponse"
-                    }
-                }
-            }
-        },
-        "tem2024.getPageMusicItemsResponse": {
-            "type": "object",
-            "properties": {
-                "page": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/tem2024.MusicItem"
-                    }
                 }
             }
         }

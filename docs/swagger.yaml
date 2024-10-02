@@ -5,17 +5,36 @@ definitions:
       message:
         type: string
     type: object
+  handler.getAllPagesMusicItemsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/tem2024.GetPageMusicItemsResponse'
+        type: array
+    type: object
   handler.getMusicTextResponse:
     properties:
       text:
         items:
-          $ref: '#/definitions/tem2024.MusicText'
+          $ref: '#/definitions/tem2024.CoupletMusicText'
         type: array
     type: object
   handler.statusResponse:
     properties:
       status:
         type: string
+    type: object
+  tem2024.CoupletMusicText:
+    properties:
+      couplet:
+        type: string
+    type: object
+  tem2024.GetPageMusicItemsResponse:
+    properties:
+      page:
+        items:
+          $ref: '#/definitions/tem2024.MusicItem'
+        type: array
     type: object
   tem2024.MusicItem:
     properties:
@@ -35,11 +54,6 @@ definitions:
     - group
     - song
     type: object
-  tem2024.MusicText:
-    properties:
-      couplet:
-        type: string
-    type: object
   tem2024.UpdateMusicInput:
     properties:
       group:
@@ -52,20 +66,6 @@ definitions:
         type: string
       text:
         type: string
-    type: object
-  tem2024.getAllPagesMusicItemsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/tem2024.getPageMusicItemsResponse'
-        type: array
-    type: object
-  tem2024.getPageMusicItemsResponse:
-    properties:
-      page:
-        items:
-          $ref: '#/definitions/tem2024.MusicItem'
-        type: array
     type: object
 host: localhost:8800
 info:
@@ -105,7 +105,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/tem2024.getAllPagesMusicItemsResponse'
+            $ref: '#/definitions/handler.getAllPagesMusicItemsResponse'
         "400":
           description: Bad Request
           schema:
@@ -143,7 +143,7 @@ paths:
         "200":
           description: OK
           schema:
-            type: integer
+            $ref: '#/definitions/handler.statusResponse'
         "400":
           description: Bad Request
           schema:
@@ -204,7 +204,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: REturn music text with pagination
+      description: Return music text with pagination
       operationId: get-music-text
       parameters:
       - description: Music ID
