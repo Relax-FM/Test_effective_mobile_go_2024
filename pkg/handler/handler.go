@@ -1,13 +1,12 @@
 package handler
 
 import (
+	_ "github.com/Relax-FM/Test_effective_mobile_go_2024/docs"
 	"github.com/Relax-FM/Test_effective_mobile_go_2024/pkg/service"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"     // swagger embed files
 	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware
 )
-
-// _ "github.com/Relax-FM/Test_effective_mobile_go_2024/docs"
 
 type Handler struct {
 	services *service.Service

@@ -20,7 +20,7 @@ func (s *Server) Run(port string, rtm, wtm time.Duration, handler http.Handler) 
 		ReadTimeout:    rtm * time.Second,
 		WriteTimeout:   wtm * time.Second,
 	}
-
+	logrus.Print(s.httpServer.Addr)
 	return s.httpServer.ListenAndServe()
 }
 

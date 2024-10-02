@@ -1,0 +1,274 @@
+basePath: /
+definitions:
+  handler.errorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  handler.getAllMusicItemsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/tem2024.MusicItem'
+        type: array
+    type: object
+  handler.getMusicTextResponse:
+    properties:
+      text:
+        items:
+          $ref: '#/definitions/tem2024.MusicText'
+        type: array
+    type: object
+  handler.statusResponse:
+    properties:
+      status:
+        type: string
+    type: object
+  tem2024.MusicItem:
+    properties:
+      group:
+        type: string
+      id:
+        type: integer
+      link:
+        type: string
+      releaseDate:
+        type: string
+      song:
+        type: string
+      text:
+        type: string
+    required:
+    - group
+    - song
+    type: object
+  tem2024.MusicText:
+    properties:
+      couplet:
+        type: string
+    type: object
+  tem2024.UpdateMusicInput:
+    properties:
+      group:
+        type: string
+      link:
+        type: string
+      releaseDate:
+        type: string
+      song:
+        type: string
+      text:
+        type: string
+    type: object
+host: localhost:8800
+info:
+  contact:
+    email: arton.2@mail.ru
+    name: Relax FM
+    url: https://github.com/Relax-FM
+  description: RestAPI Server for Music library
+  title: Music library info
+  version: 0.0.1
+paths:
+  /api/music:
+    get:
+      consumes:
+      - application/json
+      description: Get all music in our library
+      operationId: get-all-music
+      parameters:
+      - description: Sorted by
+        in: query
+        name: sort_param
+        type: string
+      - description: Desc/asc
+        in: query
+        name: desc
+        type: boolean
+      - description: limit for pagination
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.getAllMusicItemsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Get all music
+      tags:
+      - music
+    post:
+      consumes:
+      - application/json
+      description: create todo list
+      operationId: create-list
+      parameters:
+      - description: updated music info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/tem2024.UpdateMusicInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Create music item
+      tags:
+      - music
+  /api/music/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete music item by id
+      operationId: delete-music-item
+      parameters:
+      - description: Music ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.statusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Delete music item
+      tags:
+      - music
+    get:
+      consumes:
+      - application/json
+      description: REturn music text with pagination
+      operationId: get-music-text
+      parameters:
+      - description: Music ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.getMusicTextResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Get music text
+      tags:
+      - music
+    put:
+      consumes:
+      - application/json
+      description: Update music info by id
+      operationId: update-music
+      parameters:
+      - description: Music ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/tem2024.UpdateMusicInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.statusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Update music
+      tags:
+      - music
+swagger: "2.0"

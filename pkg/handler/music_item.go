@@ -70,7 +70,7 @@ func (h *Handler) deleteMusicItem(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param id path int true "Music ID"
-// @Param input body tem2024.UpdateMusicInput
+// @Param input body tem2024.UpdateMusicInput true "Update info"
 // @Success 200 {object} statusResponse
 // @Failure 400,404 {object} errorResponse
 // @Failure 500 {object} errorResponse

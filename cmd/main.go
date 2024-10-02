@@ -25,7 +25,7 @@ import (
 // @contact.url 		https://github.com/Relax-FM
 // @contact.email 		arton.2@mail.ru
 
-//	@host				localhost:8080
+//	@host				localhost:8800
 //	@BasePath			/
 
 func main() {
