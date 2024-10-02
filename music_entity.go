@@ -1,24 +1,17 @@
 package tem2024
 
 import (
+	"errors"
 	"time"
 )
-
-type UpdateMusicInput struct {
-	SongName    string `json:"song"`
-	GroupName   string `json:"group"`
-	ReleaseDate time.Time `json:"releaseDate"`
-	SongText 	string `json:"text"`
-	LinkUrl  	string `json:"link"`
-}
 
 type MusicItem struct {
 	Id          int    `json:"id" db:"id"`
 	SongName    string `json:"song" db:"song_name" binding:"required"`
 	GroupName   string `json:"group" db:"group_name" binding:"required"`
 	ReleaseDate time.Time `json:"releaseDate" db:"release_date"`
-	SongText 	string `json:"text" db:"song_text"`
-	LinkUrl 	string `json:"link" db:"link_url"`
+	SongText string `json:"text" db:"song_text"`
+	LinkUrl string `json:"link" db:"link_url"`
 }
 
 type MusicText struct {
@@ -30,6 +23,18 @@ type CreateMusicInput struct {
 	GroupName   string `json:"group" binding:"required"`
 }
 
+type UpdateMusicInput struct {
+	SongName    *string `json:"song"`
+	GroupName   *string `json:"group"`
+	ReleaseDate *time.Time `json:"releaseDate"`
+	SongText *string `json:"text"`
+	LinkUrl *string `json:"link"`
+}
+
 func (i UpdateMusicInput) Validate() error {
-	
+	if i.SongName == nil && i.GroupName == nil && i.ReleaseDate == nil && i.SongText == nil && i.LinkUrl == nil {
+		return errors.New("update music structure has no values")
+	}
+
+	return nil
 }
