@@ -21,7 +21,8 @@ func (r *MusicItemPostgres) Create(item tem2024.CreateMusicInput) (int, error) {
 
 	var id int
 	query := fmt.Sprintf("INSERT INTO %s (song_name, group_name) VALUES ($1, $2) RETURNING id", mainTable)
-	err := r.db.Select(&id, query, item.SongName, item.GroupName)
+	logrus.Print(query)
+	err := r.db.Get(&id, query, item.SongName, item.GroupName)
 
 	return id, err
 }
@@ -60,8 +61,9 @@ func (r *MusicItemPostgres) Update(itemId int, input tem2024.UpdateMusicInput) e
 
 	if input.ReleaseDate != nil {
 		setValues = append(setValues, fmt.Sprintf("release_date=$%d", argId))
-		// TODO: СЮДА вкатить приведение к формату dd.mm.yyyy
-		args = append(args, *input.ReleaseDate)
+		onlyDate := *input.ReleaseDate
+		logrus.Print(onlyDate)
+		args = append(args, onlyDate)
 		argId++
 	}
 

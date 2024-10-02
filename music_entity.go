@@ -2,22 +2,21 @@ package tem2024
 
 import (
 	"errors"
-	"time"
 )
 
 type MusicItem struct {
 	Id          int    		`json:"id" db:"id"`
 	SongName    string 		`json:"song" db:"song_name" binding:"required"`
 	GroupName   string 		`json:"group" db:"group_name" binding:"required"`
-	ReleaseDate time.Time 	`json:"releaseDate" db:"release_date"`
+	ReleaseDate string		`json:"releaseDate" db:"release_date"`
 	SongText 	string 		`json:"text" db:"song_text"`
 	LinkUrl 	string 		`json:"link" db:"link_url"`
 }
 
 type QueryParams struct {
-	SortBy 	string 	`form:"sort_by" binding:"required"`
-	Desc 	bool 	`form:"desc" binding:"required"`
-	Limit 	int 	`form:"limit" binding:"required"`
+	SortBy 		string 		`form:"sort_by" binding:"required"`
+	Desc 		bool 		`form:"desc" binding:"required"`
+	Limit 		int 		`form:"limit" binding:"required"`
 }
 
 type CoupletMusicText struct {
@@ -25,8 +24,8 @@ type CoupletMusicText struct {
 }
 
 type CreateMusicInput struct {
-	SongName    string 		`json:"song" binding:"required"`
-	GroupName   string 		`json:"group" binding:"required"`
+	SongName    string 		`json:"song" binding:"required" default:"Конь"`
+	GroupName   string 		`json:"group" binding:"required" default:"Любэ"`
 }
 
 type GetPageMusicItemsResponse struct {
@@ -34,9 +33,9 @@ type GetPageMusicItemsResponse struct {
 }
 
 type UpdateMusicInput struct {
-	SongName    *string 	`json:"song"`
-	GroupName   *string 	`json:"group"`
-	ReleaseDate *time.Time 	`json:"releaseDate"`
+	SongName    *string 	`json:"song" default:"Конь"`
+	GroupName   *string 	`json:"group" default:"Любэ"`
+	ReleaseDate *string		`json:"releaseDate" default:"2023.12.31"`
 	SongText 	*string 	`json:"text"`
 	LinkUrl 	*string 	`json:"link"`
 }

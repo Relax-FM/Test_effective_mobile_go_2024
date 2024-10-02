@@ -379,10 +379,12 @@ const docTemplate = `{
             ],
             "properties": {
                 "group": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Любэ"
                 },
                 "song": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Конь"
                 }
             }
         },
@@ -428,16 +430,19 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "group": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Любэ"
                 },
                 "link": {
                     "type": "string"
                 },
                 "releaseDate": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "2023.12.31"
                 },
                 "song": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Конь"
                 },
                 "text": {
                     "type": "string"

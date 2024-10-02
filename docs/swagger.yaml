@@ -32,8 +32,10 @@ definitions:
   tem2024.CreateMusicInput:
     properties:
       group:
+        default: Любэ
         type: string
       song:
+        default: Конь
         type: string
     required:
     - group
@@ -67,12 +69,15 @@ definitions:
   tem2024.UpdateMusicInput:
     properties:
       group:
+        default: Любэ
         type: string
       link:
         type: string
       releaseDate:
+        default: 2023.12.31
         type: string
       song:
+        default: Конь
         type: string
       text:
         type: string
