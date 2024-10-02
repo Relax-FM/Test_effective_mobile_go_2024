@@ -3,6 +3,7 @@
 
 ### init db
 For initialize db you need to download PostgreSQL then create "*__effective_mobile__*" db
+
 Then write this command:
 ```
 migrate -path ./schema -database postgres://<your_db_user>:<your_db_password>@<your_db_host>:<your_db_port>/effective_mobile?sslmode=disable up 
@@ -10,6 +11,7 @@ migrate -path ./schema -database postgres://<your_db_user>:<your_db_password>@<y
 
 ### add .env file
 For start server you need to add ".env" in your project in project dir on root lvl
+
 Your "*__.env__*" must be like:
 ```
 LOG_LEVEL=info
