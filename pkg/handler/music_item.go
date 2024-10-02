@@ -1,12 +1,16 @@
 package handler
 
 import (
+	"fmt"
+	"net/http"
+	"strconv"
+
 	tem2024 "github.com/Relax-FM/Test_effective_mobile_go_2024"
 	"github.com/gin-gonic/gin"
 )
 
-type getAllMusicItemsResponse struct {
-	Data []tem2024.MusicItem `json:"data"`
+type getAllPagesMusicItemsResponse struct {
+	Data []tem2024.GetPageMusicItemsResponse `json:"data"`
 }
 
 // @Summary Get all music
@@ -15,20 +19,34 @@ type getAllMusicItemsResponse struct {
 // @ID get-all-music
 // @Accept json
 // @Produce json
-// @Param sort_param query string false "Sorted by"
-// @Param desc query boolean false "Desc/asc"
-// @Param limit query int false "limit for pagination"
-// @Success 200 {object} getAllMusicItemsResponse
+// @Param 	sort_by 	query 	string 		false "Sorted by"				default(id)
+// @Param 	desc 		query 	boolean 	false "Desc/asc"				default(true)
+// @Param 	limit 		query 	int 		false "limit for pagination"	default(50)
+// @Success 200 {object} getAllPagesMusicItemsResponse
 // @Failure 400,404 {object} errorResponse
 // @Failure 500 {object} errorResponse
 // @Failure default {object} errorResponse
 // @Router /api/music [get]
 func (h *Handler) getAllMusic(c *gin.Context) {
+	var inputParams tem2024.QueryParams
+	if err := c.Bind(&inputParams); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
 
+	allMusic, err := h.services.MusicItem.getAllMusic(inputParams)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, getAllPagesMusicItemsResponse{
+		Data: allMusic,
+	})
 }
 
 type getMusicTextResponse struct {
-	Text []tem2024.MusicText `json:"text"`
+	Text []tem2024.CoupletMusicText `json:"text"`
 }
 
 // @Summary Get music text
@@ -44,7 +62,21 @@ type getMusicTextResponse struct {
 // @Failure default {object} errorResponse
 // @Router /api/music/{id} [get]
 func (h *Handler) getMusicText(c *gin.Context) {
-	
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid id param")
+		return
+	}
+
+	couplets, err := h.services.MusicItem.GetById(id)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, getMusicTextResponse{
+		Text: couplets,
+	})
 }
 
 // @Summary Delete music item
@@ -60,7 +92,21 @@ func (h *Handler) getMusicText(c *gin.Context) {
 // @Failure default {object} errorResponse
 // @Router /api/music/{id} [delete]
 func (h *Handler) deleteMusicItem(c *gin.Context) {
-	
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid id param")
+		return
+	}
+
+	err = h.services.MusicItem.Delete(id)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, statusResponse{
+		Status: fmt.Sprintf("Element with id %d deleted successfully", id),
+	})
 }
 
 // @Summary Update music
@@ -77,7 +123,27 @@ func (h *Handler) deleteMusicItem(c *gin.Context) {
 // @Failure default {object} errorResponse
 // @Router /api/music/{id} [put]
 func (h *Handler) updateMusicItem(c *gin.Context) {
-	
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid id param")
+		return
+	}
+
+	var input tem2024.UpdateMusicInput
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err = h.services.MusicItem.Update(id, input)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, statusResponse{
+		Status: fmt.Sprintf("Element with id %d updated successfully", id),
+	})
 }
 
 // @Summary Create music item
@@ -87,11 +153,25 @@ func (h *Handler) updateMusicItem(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param input body tem2024.UpdateMusicInput true "updated music info"
-// @Success 200 {integer} integer 1
+// @Success 200 {object} statusResponse
 // @Failure 400,404 {object} errorResponse
 // @Failure 500 {object} errorResponse
 // @Failure default {object} errorResponse
 // @Router /api/music [post]
 func (h *Handler) addMusicItem(c *gin.Context) {
-	
+	var input tem2024.CreateMusicInput
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	id, err := h.services.MusicItem.Create(input)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, statusResponse{
+		Status: fmt.Sprintf("Element with id %d added successfully", id),
+	})
 }

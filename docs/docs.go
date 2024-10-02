@@ -36,18 +36,21 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "default": "id",
                         "description": "Sorted by",
-                        "name": "sort_param",
+                        "name": "sort_by",
                         "in": "query"
                     },
                     {
                         "type": "boolean",
+                        "default": true,
                         "description": "Desc/asc",
                         "name": "desc",
                         "in": "query"
                     },
                     {
                         "type": "integer",
+                        "default": 50,
                         "description": "limit for pagination",
                         "name": "limit",
                         "in": "query"
@@ -57,7 +60,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.getAllMusicItemsResponse"
+                            "$ref": "#/definitions/tem2024.getAllPagesMusicItemsResponse"
                         }
                     },
                     "400": {
@@ -330,17 +333,6 @@ const docTemplate = `{
                 }
             }
         },
-        "handler.getAllMusicItemsResponse": {
-            "type": "object",
-            "properties": {
-                "data": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/tem2024.MusicItem"
-                    }
-                }
-            }
-        },
         "handler.getMusicTextResponse": {
             "type": "object",
             "properties": {
@@ -412,6 +404,28 @@ const docTemplate = `{
                 },
                 "text": {
                     "type": "string"
+                }
+            }
+        },
+        "tem2024.getAllPagesMusicItemsResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/tem2024.getPageMusicItemsResponse"
+                    }
+                }
+            }
+        },
+        "tem2024.getPageMusicItemsResponse": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/tem2024.MusicItem"
+                    }
                 }
             }
         }

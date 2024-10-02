@@ -5,13 +5,6 @@ definitions:
       message:
         type: string
     type: object
-  handler.getAllMusicItemsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/tem2024.MusicItem'
-        type: array
-    type: object
   handler.getMusicTextResponse:
     properties:
       text:
@@ -60,6 +53,20 @@ definitions:
       text:
         type: string
     type: object
+  tem2024.getAllPagesMusicItemsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/tem2024.getPageMusicItemsResponse'
+        type: array
+    type: object
+  tem2024.getPageMusicItemsResponse:
+    properties:
+      page:
+        items:
+          $ref: '#/definitions/tem2024.MusicItem'
+        type: array
+    type: object
 host: localhost:8800
 info:
   contact:
@@ -77,15 +84,18 @@ paths:
       description: Get all music in our library
       operationId: get-all-music
       parameters:
-      - description: Sorted by
+      - default: id
+        description: Sorted by
         in: query
-        name: sort_param
+        name: sort_by
         type: string
-      - description: Desc/asc
+      - default: true
+        description: Desc/asc
         in: query
         name: desc
         type: boolean
-      - description: limit for pagination
+      - default: 50
+        description: limit for pagination
         in: query
         name: limit
         type: integer
@@ -95,7 +105,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.getAllMusicItemsResponse'
+            $ref: '#/definitions/tem2024.getAllPagesMusicItemsResponse'
         "400":
           description: Bad Request
           schema:
