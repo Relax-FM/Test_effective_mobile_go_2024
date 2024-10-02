@@ -152,7 +152,7 @@ func (h *Handler) updateMusicItem(c *gin.Context) {
 // @ID 					create-list
 // @Accept 				json
 // @Produce 			json
-// @Param 	input 	body 		tem2024.UpdateMusicInput 	true 	"updated music info"
+// @Param 	input 	body 		tem2024.CreateMusicInput 	true 	"creating music info"
 // @Success 200 	{object} 	statusResponse
 // @Failure 400,404 {object} 	errorResponse
 // @Failure 500 	{object} 	errorResponse

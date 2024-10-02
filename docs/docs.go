@@ -104,12 +104,12 @@ const docTemplate = `{
                 "operationId": "create-list",
                 "parameters": [
                     {
-                        "description": "updated music info",
+                        "description": "creating music info",
                         "name": "input",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/tem2024.UpdateMusicInput"
+                            "$ref": "#/definitions/tem2024.CreateMusicInput"
                         }
                     }
                 ],
@@ -367,6 +367,21 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "couplet": {
+                    "type": "string"
+                }
+            }
+        },
+        "tem2024.CreateMusicInput": {
+            "type": "object",
+            "required": [
+                "group",
+                "song"
+            ],
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "song": {
                     "type": "string"
                 }
             }

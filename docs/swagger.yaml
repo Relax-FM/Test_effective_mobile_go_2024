@@ -29,6 +29,16 @@ definitions:
       couplet:
         type: string
     type: object
+  tem2024.CreateMusicInput:
+    properties:
+      group:
+        type: string
+      song:
+        type: string
+    required:
+    - group
+    - song
+    type: object
   tem2024.GetPageMusicItemsResponse:
     properties:
       page:
@@ -131,12 +141,12 @@ paths:
       description: create todo list
       operationId: create-list
       parameters:
-      - description: updated music info
+      - description: creating music info
         in: body
         name: input
         required: true
         schema:
-          $ref: '#/definitions/tem2024.UpdateMusicInput'
+          $ref: '#/definitions/tem2024.CreateMusicInput'
       produces:
       - application/json
       responses:
