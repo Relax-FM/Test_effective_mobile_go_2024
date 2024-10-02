@@ -34,7 +34,7 @@ func (h *Handler) getAllMusic(c *gin.Context) {
 		return
 	}
 
-	allMusic, err := h.services.MusicItem.getAllMusic(inputParams)
+	allMusic, err := h.services.MusicItem.GetAllMusic(inputParams)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

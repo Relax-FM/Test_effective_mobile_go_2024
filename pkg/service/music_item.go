@@ -17,8 +17,8 @@ func (s *MusicItemService) Create(item tem2024.CreateMusicInput) (int, error) {
 	return s.repo.Create(item)
 }
 
-func (s *MusicItemService) getAllMusic(listId tem2024.QueryParams) ([]tem2024.GetPageMusicItemsResponse, error) {
-	return s.repo.getAllMusic(listId)
+func (s *MusicItemService) GetAllMusic(listId tem2024.QueryParams) ([]tem2024.GetPageMusicItemsResponse, error) {
+	return s.repo.GetAllMusic(listId)
 }
 
 func (s *MusicItemService) GetById(itemId int) ([]tem2024.CoupletMusicText, error) {
