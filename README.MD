@@ -45,8 +45,13 @@ go run .\cmd\main.go
 Наслаждайтесь!
 
 
+## Как открыть swagger
 
+Чтобы открыть свагер, просто запустите сервер и перейдите по URI:
 
+```
+http://<your_server_host>:<your_server_port>/swagger/index.html
+```
 
 
 # My project for test my skills in go for "effective mobile" in 2024.
@@ -88,3 +93,10 @@ go run .\cmd\main.go
 Then upload all needed modules.
 
 After that try this command again for start server
+
+## How to open swagger
+
+For correct opening swagger UI you need to start server then move to page URI:
+```
+http://<your_server_host>:<your_server_port>/swagger/index.html
+```
