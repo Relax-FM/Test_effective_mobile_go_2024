@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jmoiron/sqlx"
+	"github.com/sirupsen/logrus"
 )
 
 const (
@@ -30,4 +31,13 @@ func NewPostgresDB(cfg Config) (*sqlx.DB, error) {
 	}
 
 	return db, nil
+}
+
+func CloseDB(db *sqlx.DB) {
+	logrus.Print("Try to close DB")
+	if err := db.Close(); err != nil {
+		logrus.Errorf("error occurred on db close: %s", err.Error())
+	} else {
+		logrus.Print("DB successfully closed!")
+	}
 }

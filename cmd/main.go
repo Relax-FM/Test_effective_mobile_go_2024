@@ -13,6 +13,7 @@ import (
 	"github.com/Relax-FM/Test_effective_mobile_go_2024/pkg/repository"
 	"github.com/Relax-FM/Test_effective_mobile_go_2024/pkg/service"
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 )
 
@@ -69,16 +70,12 @@ func main() {
 
 	logrus.Print("Music library Started")
 
+	defer logrus.Print("Music library Shuted Down")
+	defer srv.Shutdown(context.Background())
+	defer repository.CloseDB(db)
+	defer logrus.Print("Music library Shutting Down")
+
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
 	<- quit
-
-	logrus.Print("Music library Shutting Down")
-
-	if err := srv.Shutdown(context.Background()); err != nil{
-		logrus.Errorf("error occurred on server shutting down: %s", err.Error())
-	}
-	if err := db.Close(); err != nil {
-		logrus.Errorf("error occurred on db close: %s", err.Error())
-	}
 }
