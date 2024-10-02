@@ -35,4 +35,5 @@ For start server you need to write command:
 go run .\cmd\main.go 
 ```
 Then upload all needed modules.
+
 After that try this command again for start server
