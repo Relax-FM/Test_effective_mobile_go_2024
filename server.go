@@ -30,6 +30,6 @@ func (s *Server) Shutdown(ctx context.Context) {
 	if err != nil {
 		logrus.Errorf("error occurred on server shutting down: %s", err.Error())
 	} else {
-		logrus.Print("Server shuted down successfully!")
+		defer logrus.Print("Server shuted down successfully!")
 	}
 }
