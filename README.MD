@@ -7,7 +7,7 @@
 Далее, создать в ней базу "*__effective_mobile__*".
 
 Для миграции таблицы пропишите команду, предварительно установив утилиту migrate:
-```
+```sh
 migrate -path ./schema -database postgres://<your_db_user>:<your_db_password>@<your_db_host>:<your_db_port>/effective_mobile?sslmode=disable up 
 ```
 
@@ -15,7 +15,7 @@ migrate -path ./schema -database postgres://<your_db_user>:<your_db_password>@<y
 Для корректного запуска сервера и для его настройки, добавим файл "*__.env__*" в директорию проекта (файл должен лежать на одном уровне с файлами server.go и music_entity.go и другими).
 
 Сам файл "*__.env__*" должен выглядеть так (вместо ***** подставьте свои значения):
-```
+```dotenv
 LOG_LEVEL=info
 
 APP_PORT=*****
@@ -33,7 +33,7 @@ WRITE_TIMEOUT=*****
 
 ### Запуск сервера
 Для запуска сервера пропишите команду:
-```
+```sh
 go run .\cmd\main.go 
 ```
 Она должна загрузить все необходимые модули для корректного запуска сервера.
@@ -49,7 +49,7 @@ go run .\cmd\main.go
 
 Чтобы открыть свагер, просто запустите сервер и перейдите по URI:
 
-```
+```link
 http://<your_server_host>:<your_server_port>/swagger/index.html
 ```
 
@@ -61,7 +61,7 @@ http://<your_server_host>:<your_server_port>/swagger/index.html
 For initialize db you need to download PostgreSQL then create "*__effective_mobile__*" db
 
 Then write this command:
-```
+```sh
 migrate -path ./schema -database postgres://<your_db_user>:<your_db_password>@<your_db_host>:<your_db_port>/effective_mobile?sslmode=disable up 
 ```
 
@@ -69,7 +69,7 @@ migrate -path ./schema -database postgres://<your_db_user>:<your_db_password>@<y
 For start server you need to add ".env" in your project in project dir on root lvl
 
 Your "*__.env__*" must be like:
-```
+```dotenv
 LOG_LEVEL=info
 
 APP_PORT=*****
@@ -87,7 +87,7 @@ WRITE_TIMEOUT=*****
 
 ### Start server
 For start server you need to write command:
-```
+```sh
 go run .\cmd\main.go 
 ```
 Then upload all needed modules.
@@ -97,6 +97,6 @@ After that try this command again for start server
 ## How to open swagger
 
 For correct opening swagger UI you need to start server then move to page URI:
-```
+```link
 http://<your_server_host>:<your_server_port>/swagger/index.html
 ```
