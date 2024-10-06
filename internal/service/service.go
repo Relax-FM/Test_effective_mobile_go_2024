@@ -2,7 +2,7 @@ package service
 
 import (
 	tem2024 "github.com/Relax-FM/Test_effective_mobile_go_2024"
-	"github.com/Relax-FM/Test_effective_mobile_go_2024/pkg/repository"
+	"github.com/Relax-FM/Test_effective_mobile_go_2024/internal/repository"
 )
 
 type MusicItem interface {

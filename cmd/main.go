@@ -9,9 +9,9 @@ import (
 	"time"
 
 	tem2024 "github.com/Relax-FM/Test_effective_mobile_go_2024"
-	"github.com/Relax-FM/Test_effective_mobile_go_2024/pkg/handler"
-	"github.com/Relax-FM/Test_effective_mobile_go_2024/pkg/repository"
-	"github.com/Relax-FM/Test_effective_mobile_go_2024/pkg/service"
+	"github.com/Relax-FM/Test_effective_mobile_go_2024/internal/handler"
+	"github.com/Relax-FM/Test_effective_mobile_go_2024/internal/repository"
+	"github.com/Relax-FM/Test_effective_mobile_go_2024/internal/service"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
